@@ -31,7 +31,8 @@ class Login extends React.Component {
     e.preventDefault()
     const {username, password} = this.state
     //login function
-    if(username=== "admin" && password==="admin") {
+    if((username=== "admin" && password==="admin") ||
+            (username=== "student" && password==="student")){
       localStorage.setItem("token", "sakdnajkdbaSHA256")
       this.setState({
         loggedIn: true
@@ -40,7 +41,12 @@ class Login extends React.Component {
   }
   render() {
     if(this.state.loggedIn) {
-      return <Redirect to="/admin"/>
+        if (this.state.username == "admin") {
+            return <Redirect to="/admin"/>
+        }
+        if (this.state.username == "student") {
+            return <Redirect to="/student"/>
+        }
     }
     return (
       <div>
